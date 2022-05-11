@@ -30,7 +30,7 @@ public class Launcher {
             return;
         }
 
-        FindFun finder = new FindFun();
+        Find finder = new Find();
         try {
             finder.search(directory, fileNames, subdirectory);
         } catch (IOException e) {
