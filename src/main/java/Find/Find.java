@@ -15,18 +15,19 @@ public class Find {
         File baseDir = new File(directory);
 
         if (!Files.exists(path)) throw new IOException("There is no such directory");
+        if (!baseDir.isDirectory()) throw new NullPointerException();
 
         Queue<File> dirTree = new PriorityQueue<>();
         NonNullFun(dirTree, baseDir);
         while (!dirTree.isEmpty()) {
             File currentFile = dirTree.remove();
-            if (subdirectory && baseDir.isDirectory()) {
+            if (subdirectory) {
                 if (currentFile.isDirectory()) {
                     NonNullFun(dirTree, currentFile);
                 } else {
                     returnName(currentFile, fileNames, result);
                 }
-            } else if (!subdirectory && baseDir.isDirectory()) {
+            } else {
                 if (!currentFile.isDirectory()) {
                     returnName(currentFile, fileNames, result);
                 }
