@@ -3,6 +3,7 @@ package Find;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
+import java.util.concurrent.ArrayBlockingQueue;
 
 
 public class Find {
@@ -13,7 +14,7 @@ public class Find {
         if (!baseDir.exists()) throw new IOException("There is no such directory");
         if (!baseDir.isDirectory()) throw new NullPointerException();
 
-        Queue<File> dirTree = new PriorityQueue<>();
+        Queue<File> dirTree = new ArrayBlockingQueue<>(20);
         NonNullFun(dirTree, baseDir);
         while (!dirTree.isEmpty()) {
             File currentFile = dirTree.remove();

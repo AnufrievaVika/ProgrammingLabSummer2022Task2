@@ -20,13 +20,15 @@ public class FindTest {
     @Test
     void fileInsteadOfDirectory() {
         assertThrows(NullPointerException.class,
-                () -> finder.search("pom.xml", List.of("first.txt", "second.txt", "third.txt", "fourth.txt", "fifth.txt", "sixth.txt", "seventh.txt", "eighth.txt"), true));
+                () -> finder.search("pom.xml",
+                        List.of("first.txt", "second.txt", "third.txt", "fourth.txt", "fifth.txt", "sixth.txt", "seventh.txt", "eighth.txt"), true));
     }
 
     @Test
     void nonExistedDirectory() {
         assertThrows(IOException.class,
-                () -> finder.search("./inputT", List.of("first.txt", "second.txt", "third.txt", "fourth.txt", "fifth.txt", "sixth.txt", "seventh.txt", "eighth.txt"), true));
+                () -> finder.search("./inputT",
+                        List.of("first.txt", "second.txt", "third.txt", "fourth.txt", "fifth.txt", "sixth.txt", "seventh.txt", "eighth.txt"), true));
     }
 
     @BeforeEach
@@ -37,7 +39,7 @@ public class FindTest {
     @Test
     public void allFiles() throws IOException {
         finder.search("./input", List.of("first.txt", "second.txt", "third.txt", "fourth.txt", "fifth.txt", "sixth.txt", "seventh.txt", "eighth.txt"), true);
-        String names = "first.txt\nsecond.txt\nfourth.txt\nfifth.txt\nsixth.txt\neighth.txt\nseventh.txt\nthird.txt\n";
+        String names = "first.txt\nsecond.txt\nfourth.txt\nthird.txt\nfifth.txt\nsixth.txt\neighth.txt\nseventh.txt\n";
         Assertions.assertEquals(names, output.toString());
     }
 
