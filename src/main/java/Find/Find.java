@@ -2,18 +2,15 @@ package Find;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.*;
 
 
 public class Find {
 
     public void search(String directory, List<String> fileNames, boolean subdirectory) throws IOException {
-        Path path = Path.of(directory);
         File baseDir = new File(directory);
 
-        if (!Files.exists(path)) throw new IOException("There is no such directory");
+        if (!baseDir.exists()) throw new IOException("There is no such directory");
         if (!baseDir.isDirectory()) throw new NullPointerException();
 
         Queue<File> dirTree = new PriorityQueue<>();
