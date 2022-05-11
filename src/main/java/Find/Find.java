@@ -9,8 +9,7 @@ import java.util.*;
 
 public class Find {
 
-    public Set<String> search(String directory, List<String> fileNames, boolean subdirectory) throws IOException {
-        Set<String> result = new HashSet<>();
+    public void search(String directory, List<String> fileNames, boolean subdirectory) throws IOException {
         Path path = Path.of(directory);
         File baseDir = new File(directory);
 
@@ -25,32 +24,28 @@ public class Find {
                 if (currentFile.isDirectory()) {
                     NonNullFun(dirTree, currentFile);
                 } else {
-                    returnName(currentFile, fileNames, result);
+                    returnName(currentFile, fileNames);
                 }
             } else {
                 if (!currentFile.isDirectory()) {
-                    returnName(currentFile, fileNames, result);
+                    returnName(currentFile, fileNames);
                 }
             }
         }
-        if (result.isEmpty()) System.err.println("Files not found");
-        else System.out.println(result);
-        return result;
+        System.err.println("Поиск окончен");
     }
 
-    private void returnName(File a, List<String> b, Set<String> c) {
+    private void returnName(File a, List<String> b) {
         String finalName = a.getName();
         if (b.contains(finalName)) {
-            System.out.println(finalName);
-            c.add(finalName);
+            System.out.print(finalName + "\n");
         }
     }
 
-        private void NonNullFun (Queue <File> d, File e){
-            File[] files = e.listFiles();
-            Objects.requireNonNull(files);
-            d.addAll(List.of(files));
+    private void NonNullFun (Queue <File> d, File e){
+        File[] files = e.listFiles();
+        Objects.requireNonNull(files);
+        d.addAll(List.of(files));
         }
-
     }
 
