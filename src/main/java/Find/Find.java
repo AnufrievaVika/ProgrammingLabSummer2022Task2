@@ -18,16 +18,9 @@ public class Find {
         addFilesToQueue(dirTree, baseDir);
         while (!dirTree.isEmpty()) {
             File currentFile = dirTree.remove();
-            if (subdirectory) {
-                if (currentFile.isDirectory() ) {
-                    addFilesToQueue(dirTree, currentFile);
-                } else {
-                    returnName(currentFile, fileNames);
-                }
-            } else {
-                if (!currentFile.isDirectory()) {
-                    returnName(currentFile, fileNames);
-                }
+            returnName(currentFile, fileNames);
+            if (currentFile.isDirectory() && subdirectory) {
+                addFilesToQueue(dirTree, currentFile);
             }
         }
     }
@@ -39,9 +32,9 @@ public class Find {
         }
     }
 
-    private void addFilesToQueue(Queue <File> queue, File file) {
+    private void addFilesToQueue(Queue<File> queue, File file) {
         File[] files = file.listFiles();
         Objects.requireNonNull(files);
         queue.addAll(List.of(files));
-        }
     }
+}
